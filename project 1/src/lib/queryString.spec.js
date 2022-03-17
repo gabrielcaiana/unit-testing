@@ -8,4 +8,27 @@ describe('Object to query string', () => {
 
     expect(queryString(obj)).toBe('name=Gabriel&profession=developer');
   });
+
+  it('should create a valid query string when an array is provide', () => {
+    const obj = {
+      name: 'Gabriel',
+      abilitites: ['JS', 'VUE', 'TDD'],
+    };
+    console.log(queryString(obj));
+
+    expect(queryString(obj)).toBe('name=Gabriel&abilitites=JS,VUE,TDD');
+  });
+
+  it('should throw an error when a object is passed as value', () => {
+    const obj = {
+      name: 'Gabriel',
+      abilitites: {
+        first: 'JS',
+        second: 'VUE',
+      },
+    };
+    expect(() => {
+      queryString(obj);
+    }).toThrowError();
+  });
 });
